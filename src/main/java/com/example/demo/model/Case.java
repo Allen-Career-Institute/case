@@ -1,9 +1,10 @@
-package com.example.demo;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,6 +30,9 @@ public class Case {
     @ManyToOne
     @JoinColumn(name = "campaign_id")
     private Campaign campaign;
+
+    @OneToMany(mappedBy = "task")
+    private List<Task> tasks;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 }
