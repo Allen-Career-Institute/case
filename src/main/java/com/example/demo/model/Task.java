@@ -26,6 +26,6 @@ public class Task {
 
     private String description;
 
-    private Status status;
+    private TaskStatus status;
 
 }

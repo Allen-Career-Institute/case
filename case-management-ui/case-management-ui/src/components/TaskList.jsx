@@ -4,7 +4,7 @@ import TaskList from "./TaskList";
 const statusOrder = ["OPEN", "ASSIGNED", "IN_PROGRESS", "CLOSED"];
 
 const CaseDetails = ({ selectedCase }) => {
-    if (!selectedCase) return <div>Select a case to view details</div>;
+    if (!selectedCase) return <div>No associated tasks</div>;
 
     const handleStatusChange = (newStatus) => {
         const currentIndex = statusOrder.indexOf(selectedCase.status);

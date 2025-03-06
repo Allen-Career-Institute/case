@@ -20,7 +20,7 @@ public class Case {
 
     private String title;
     private String description;
-    private Status status; // OPEN, IN_PROGRESS, CLOSED
+    private CaseStatus status; // OPEN, IN_PROGRESS, CLOSED
     private Category category;
 
     private String assigneeID;

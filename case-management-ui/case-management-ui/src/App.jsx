@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import CaseDetails from "./components/CaseDetails";
 
-const API_URL = "http://localhost:9090/cases"; // Adjust API URL if needed
+const API_URL = "http://localhost:9090/cases"; // Adjust as needed
 
 const App = () => {
     const [cases, setCases] = useState([]);
-    const [selectedCase, setSelectedCase] = useState(null);
-    const [leftPaneWidth, setLeftPaneWidth] = useState(40); // % width of left pane
+    const [selectedCaseId, setSelectedCaseId] = useState(null);
+    const [leftPaneWidth, setLeftPaneWidth] = useState(40); // Default left pane width
 
     const fetchCases = async () => {
         try {
@@ -24,6 +24,9 @@ const App = () => {
         const interval = setInterval(fetchCases, 5000);
         return () => clearInterval(interval);
     }, []);
+
+    // Find the selected case dynamically
+    const selectedCase = cases.find((c) => c.id === selectedCaseId);
 
     return (
         <div style={{ display: "flex", flexDirection: "column", height: "100vh", width: "100vw" }}>
@@ -48,12 +51,12 @@ const App = () => {
                         {cases.map((c) => (
                             <li
                                 key={c.id}
-                                onClick={() => setSelectedCase(c)}
+                                onClick={() => setSelectedCaseId(c.id)}
                                 style={{
                                     padding: "10px",
                                     borderBottom: "1px solid #ddd",
                                     cursor: "pointer",
-                                    background: selectedCase?.id === c.id ? "#f0f0f0" : "white",
+                                    background: selectedCaseId === c.id ? "#f0f0f0" : "white",
                                 }}
                             >
                                 <strong>{c.title}</strong> <br />
@@ -95,7 +98,7 @@ const App = () => {
 
                 {/* Right Pane - Case Details */}
                 <div style={{ flexGrow: 1, padding: "10px", overflowY: "auto" }}>
-                    <CaseDetails selectedCase={selectedCase} />
+                    {selectedCase ? <CaseDetails selectedCase={selectedCase} /> : <p>Select a case to view details</p>}
                 </div>
             </div>
         </div>

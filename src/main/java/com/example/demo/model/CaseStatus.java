@@ -1,8 +1,8 @@
-package com.example.demo;
+package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public enum Status {
+public enum CaseStatus {
 
     @JsonProperty("OPEN")
     OPEN,

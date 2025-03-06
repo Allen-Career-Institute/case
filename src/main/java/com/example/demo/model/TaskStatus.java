@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public enum Status {
+public enum TaskStatus {
 
     @JsonProperty("OPEN")
     OPEN,
