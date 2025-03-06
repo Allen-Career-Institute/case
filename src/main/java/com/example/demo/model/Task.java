@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,6 +18,7 @@ public class Task {
     private Long id;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "case_id")
     private Case linkedCase;
 
@@ -25,6 +27,10 @@ public class Task {
    private String assigneeID;
 
     private String description;
+
+    private String transcript;
+
+    private Long duration;
 
     private TaskStatus status;
 

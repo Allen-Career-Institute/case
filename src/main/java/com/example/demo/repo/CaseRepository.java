@@ -16,4 +16,6 @@ public interface CaseRepository extends JpaRepository<Case, Long> {
 
     @Query(value = "SELECT * FROM cases WHERE urm_student_id = :studentId and status = :status", nativeQuery = true)
     List<Case> findByStudentId(String studentId, CaseStatus status);
+    @Query(value = "SELECT * FROM cases WHERE assignee_id = :assigneeId", nativeQuery = true)
+    List<Case> findByAssignee(String assigneeId);
 }

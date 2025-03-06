@@ -26,9 +26,14 @@ public class CaseController {
         return caseService.getAllCases();
     }
 
+    @GetMapping("/assignee")
+    public List<Case> getCaseForAssigneeDetails(@RequestParam String assigneeId) {
+        return caseService.getAllCasesForAssignee(assigneeId);
+    }
+
     @GetMapping("/students")
     public List<Case> getStudentDetails(@RequestParam String studentId) {
-        return caseService.getAllCases(studentId);
+        return caseService.getAllCasesForStudent(studentId);
     }
 
     @GetMapping("/{caseId}")

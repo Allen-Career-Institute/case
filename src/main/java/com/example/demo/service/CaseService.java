@@ -40,8 +40,12 @@ public class CaseService {
         return caseRepository.getReferenceById(caseId).getTasks();
     }
 
-    public List<Case> getAllCases(String studentId) {
+    public List<Case> getAllCasesForStudent(String studentId) {
         return caseRepository.findByStudentId(studentId);
+    }
+
+    public List<Case> getAllCasesForAssignee(String assigneeId) {
+        return caseRepository.findByAssignee(assigneeId);
     }
 
     public Task createTask(Long caseId, Task newTask) {
