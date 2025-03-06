@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,13 +30,13 @@ public class Case {
 
     private String assigneeId;
 
-    @ManyToOne(fetch = FetchType.LAZY) // ✅ Lazy load campaign to avoid serialization issues
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campaign_id")
-    @JsonIgnoreProperties("cases") // ✅ Prevents recursion issues if Campaign has a @OneToMany mapping back to Case
+    @JsonIgnoreProperties("cases")
     private Campaign campaign;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "linkedCase") // ✅ Fix mapping (mappedBy should be used)
-    @JsonIgnoreProperties("linkedCase") // ✅ Prevents recursion issues if Task has a @ManyToOne mapping back to Case
+    @OneToMany(mappedBy = "linkedCase", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Task> tasks = new ArrayList<>();
 
 

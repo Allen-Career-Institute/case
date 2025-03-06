@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,10 +20,9 @@ public class Task {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "case_id", nullable = false)
+    @JsonBackReference
     private Case linkedCase;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private TaskType taskType;
 
    private String assigneeId;
@@ -33,8 +33,6 @@ public class Task {
 
     private Long duration;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private TaskStatus status;
 
 }
