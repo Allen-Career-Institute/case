@@ -19,13 +19,7 @@ public class TaskController {
         this.taskRepository = taskRepository;
     }
 
-    @GetMapping
-    public List<Task> getAllTasksByCaseId(@RequestParam String caseId)
-    {
-        return taskRepository.findByLinkedCase(caseId);
-    };
-
-    @PostMapping
+    @PostMapping()
     public Task createTask(@RequestBody Task newTask) { return taskService.createTask(newTask); }
 
 }

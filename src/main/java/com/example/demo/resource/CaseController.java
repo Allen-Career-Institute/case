@@ -2,6 +2,7 @@ package com.example.demo.resource;
 
 
 import com.example.demo.model.Case;
+import com.example.demo.model.Task;
 import com.example.demo.service.CaseService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,9 @@ public class CaseController {
     public List<Case> getAllCases() {
         return caseService.getAllCases();
     }
+
+    @GetMapping("/{caseId}")
+    public List<Task> getAllTasks(@PathVariable("caseId") Long caseId) { return caseService.getAllTasks(caseId);}
 
     @PostMapping
     public Case createCase(@RequestBody Case newCase) {

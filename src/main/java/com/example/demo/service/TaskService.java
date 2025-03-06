@@ -15,10 +15,5 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<Task> getAllCases() {
-        return taskRepository.findAll();
-    }
-
-
     public Task createTask(Task newTask) { return taskRepository.save(newTask); }
 }

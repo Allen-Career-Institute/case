@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Case;
+import com.example.demo.model.Task;
 import com.example.demo.repo.CaseRepository;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,9 @@ public class CaseService {
         return caseRepository.save(case1);
 
 
+    }
+
+    public List<Task> getAllTasks(Long caseId) {
+        return caseRepository.getReferenceById(caseId).getTasks();
     }
 }
