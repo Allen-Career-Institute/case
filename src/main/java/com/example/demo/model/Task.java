@@ -16,5 +16,18 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "case_id")
+    private Case linkedCase;
+
+    private TaskType taskType;
+
+    @OneToOne
+    @JoinColumn(name = "assignee_id")
+    private Assignee assignee;
+
+    private String description;
+
+    private Status status;
 
 }

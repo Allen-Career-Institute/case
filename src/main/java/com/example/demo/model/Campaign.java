@@ -19,6 +19,6 @@ public class Campaign {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "campaign")
+    @OneToMany(mappedBy = "case_id")
     private List<Case> cases;
 }
