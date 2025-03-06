@@ -71,30 +71,29 @@ const CallPopup = ({ caseId, onClose }) => {
 
     // Function to send API request when call ends
     const handleEndCall = async () => {
-        const taskId = "some-task-id"; // Replace with actual Task ID
-        const duration = seconds;
+        stopRecording();
+
+        const taskData = {
+            taskType: "CALL",
+            assigneeID: assigneeID || "ABC1", // Default value if not provided
+            description: "Outbound call to customer",
+            duration: `${seconds}`,
+            transcript: `${transcript}`,
+            status: "CLOSED",
+        };
 
         try {
-            await fetch(`http://localhost:9090/tasks/update`, {
+            await fetch(`http://localhost:9090/cases/${caseId}/tasks`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    caseId,
-                    taskId,
-                    duration,
-                    transcript,
-                }),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(taskData),
             });
-
-            console.log("Call details updated:", { duration, transcript });
+            console.log("Task created:", taskData);
         } catch (error) {
-            console.error("Failed to update call details", error);
+            console.error("Failed to create task", error);
         }
 
-        stopRecording();
-        onClose(); // Close the popup
+        onClose();
     };
 
     return (

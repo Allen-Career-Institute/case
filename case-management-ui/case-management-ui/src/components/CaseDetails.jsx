@@ -1,20 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TaskList from "./TaskList";
 import CallWidget from "./CallWidget";
 
 const statusOrder = ["OPEN", "ASSIGNED", "IN_PROGRESS", "CLOSED"];
 
 const CaseDetails = ({ selectedCase }) => {
-    if (!selectedCase) return <div>Select a case to view detailas</div>;
+    const [caseDetails, setCaseDetails] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        if (!selectedCase) return;
+
+        const fetchCaseDetails = async () => {
+            setLoading(true);
+            setError(null);
+
+            try {
+                const response = await fetch(`http://localhost:9090/cases/${selectedCase.id}`);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch case details");
+                }
+                const data = await response.json();
+                setCaseDetails(data);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCaseDetails();
+    }, [selectedCase]);
+
+    if (!selectedCase) return <div>Select a case to view details</div>;
 
     const handleStatusChange = (newStatus) => {
-        const currentIndex = statusOrder.indexOf(selectedCase.status);
+        const currentIndex = statusOrder.indexOf(caseDetails.status);
         const newIndex = statusOrder.indexOf(newStatus);
 
         if (newIndex > currentIndex) {
             const confirmChange = window.confirm(`Change status to ${newStatus}?`);
             if (confirmChange) {
-                console.log(`Updating case ${selectedCase.id} to status: ${newStatus}`);
+                console.log(`Updating case ${caseDetails.id} to status: ${newStatus}`);
                 // API call to update status can be placed here
             }
         } else {
@@ -24,7 +52,7 @@ const CaseDetails = ({ selectedCase }) => {
 
     return (
         <div>
-            <h2>{selectedCase.title}</h2>
+            <h2>{caseDetails.title}</h2>
             {/* Status Bar */}
             <div style={{ display: "flex", marginBottom: "10px" }}>
                 {statusOrder.map((status) => (
@@ -36,7 +64,7 @@ const CaseDetails = ({ selectedCase }) => {
                             flex: 1,
                             textAlign: "center",
                             cursor: "pointer",
-                            background: selectedCase.status === "CLOSED" ? "green" : selectedCase.status === status ? "blue" : "lightgray",
+                            background: caseDetails.status === "CLOSED" ? "green" : caseDetails.status === status ? "blue" : "lightgray",
                             color: "white",
                         }}
                     >
@@ -44,15 +72,16 @@ const CaseDetails = ({ selectedCase }) => {
                     </div>
                 ))}
             </div>
-            {/* <p><strong>Title:</strong> {selectedCase.title}</p> */}
-            <p><strong>Description:</strong> {selectedCase.description}</p>
-            <p><strong>Category:</strong> {selectedCase.category}</p>
-            <p><strong>Created At:</strong> {new Date(selectedCase.createdAt).toLocaleString()}</p>
+            {/* <p><strong>Title:</strong> {caseDetails
+            .title}</p> */}
+            <p><strong>Description:</strong> {caseDetails.description}</p>
+            <p><strong>Category:</strong> {caseDetails.category}</p>
+            <p><strong>Created At:</strong> {new Date(caseDetails.createdAt).toLocaleString()}</p>
 
-            <CallWidget caseDetails={selectedCase} />
+            <CallWidget caseDetails={caseDetails} />
 
             {/* Task List */}
-            <TaskList tasks={selectedCase.tasks} />
+            <TaskList tasks={caseDetails.tasks} />
         </div>
     );
 };
