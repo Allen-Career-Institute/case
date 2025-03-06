@@ -31,7 +31,8 @@ public class Case {
     @JoinColumn(name = "campaign_id")
     private Campaign campaign;
 
-    @OneToMany(mappedBy = "task")
+    @OneToMany
+    @JoinColumn(name = "task_id")
     private List<Task> tasks;
 
     private LocalDateTime createdAt = LocalDateTime.now();

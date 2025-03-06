@@ -21,6 +21,7 @@ public class Student {
     private Stream stream;
 
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany
+    @JoinColumn(name = "case_id")
     private List<Case> cases;
 }
