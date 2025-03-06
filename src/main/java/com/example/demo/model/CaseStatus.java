@@ -12,6 +12,8 @@ public enum CaseStatus {
     @JsonProperty("ASSIGNED")
     ASSIGNED,
 
+    @JsonProperty("COMPLETED")
+    COMPLETED,
     @JsonProperty("CLOSED")
     CLOSED;
 }

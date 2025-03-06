@@ -17,14 +17,15 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "case_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "case_id", nullable = false)
     private Case linkedCase;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TaskType taskType;
 
-   private String assigneeID;
+   private String assigneeId;
 
     private String description;
 
@@ -32,6 +33,8 @@ public class Task {
 
     private Long duration;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TaskStatus status;
 
 }

@@ -39,7 +39,7 @@ public class Case {
     private List<Task> tasks = new ArrayList<>();
 
 
-    private String urmStudentId;
+    private String studentId;
 
     @JsonIgnore
     private String studentProfile;
@@ -50,6 +50,6 @@ public class Case {
 
     @JsonIgnore
     public String getStudentProfile() {
-        return "https://astra.allen.in/student-support/resource-management/student/view/"+urmStudentId;
+        return "https://astra.allen.in/student-support/resource-management/student/view/"+studentId;
     }
 }

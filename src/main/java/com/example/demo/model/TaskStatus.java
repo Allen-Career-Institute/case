@@ -12,6 +12,9 @@ public enum TaskStatus {
     @JsonProperty("ASSIGNED")
     ASSIGNED,
 
+    @JsonProperty("COMPLETED")
+    COMPLETED,
+
     @JsonProperty("CLOSED")
     CLOSED;
 }
