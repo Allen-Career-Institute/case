@@ -37,7 +37,9 @@ public class CaseController {
     }
 
     @GetMapping("/{caseId}")
-    public List<Task> getAllTasks(@PathVariable("caseId") Long caseId) { return caseService.getAllTasks(caseId);}
+    public Case getCases(@PathVariable("caseId") Long caseId) {
+        return caseService.getAllCases(caseId);
+    }
 
     @PostMapping
     public Case createCase(@RequestBody Case newCase) {
@@ -53,6 +55,11 @@ public class CaseController {
     public Task createTask(@PathVariable Long caseId, @RequestBody Task newTask) {
         return caseService.createTask(caseId, newTask);
     }
+
+//    @GetMapping("/{caseId}/tasks")
+//    public List<Task> getTasks(@PathVariable Long caseId) {
+//        return caseService.getAllTasks(caseId);
+//    }
 
 
 }

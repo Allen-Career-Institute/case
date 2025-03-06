@@ -3,17 +3,21 @@ package com.example.demo.service;
 import com.example.demo.model.Case;
 import com.example.demo.model.Task;
 import com.example.demo.repo.CaseRepository;
+import com.example.demo.repo.TaskRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class CaseService {
 
     private final CaseRepository caseRepository;
+    private final TaskRepository taskRepository;
 
-    public CaseService(CaseRepository caseRepository) {
+    public CaseService(CaseRepository caseRepository, TaskRepository taskRepository) {
         this.caseRepository = caseRepository;
+        this.taskRepository = taskRepository;
     }
 
     public List<Case> getAllCases() {
@@ -50,8 +54,18 @@ public class CaseService {
 
     public Task createTask(Long caseId, Task newTask) {
         Case aCase = caseRepository.getReferenceById(caseId);
+        newTask.setLinkedCase(aCase);
+        taskRepository.save(newTask);
+        if(aCase.getTasks() == null || aCase.getTasks().isEmpty()) {
+            aCase.setTasks(Arrays.asList(newTask));
+            return newTask;
+        }
         aCase.getTasks().add(newTask);
         caseRepository.save(aCase);
-        return aCase.getTasks().get(aCase.getTasks().size() - 1);
+        return newTask;
+    }
+
+    public Case getAllCases(Long caseId) {
+        return caseRepository.getReferenceById(caseId);
     }
 }
