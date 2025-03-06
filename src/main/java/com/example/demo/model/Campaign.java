@@ -19,6 +19,7 @@ public class Campaign {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "case_id")
+    @OneToMany
+    @JoinColumn(name = "case_id")
     private List<Case> cases;
 }

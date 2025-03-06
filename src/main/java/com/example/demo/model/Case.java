@@ -11,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cases")
+@Setter@Getter
 public class Case {
 
     @Id
@@ -19,12 +20,10 @@ public class Case {
 
     private String title;
     private String description;
-    private Enum<Status> status; // OPEN, IN_PROGRESS, CLOSED
-    private Enum<Category> category;
+    private Status status; // OPEN, IN_PROGRESS, CLOSED
+    private Category category;
 
-    @ManyToOne
-    @JoinColumn(name = "assignee_id")
-    private Assignee assignee;
+    private String assigneeID;
 
     @ManyToOne
     @JoinColumn(name = "campaign_id")
@@ -33,6 +32,8 @@ public class Case {
     @OneToMany
     @JoinColumn(name = "task_id")
     private List<Task> tasks;
+
+    private String urmStudentID;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 }

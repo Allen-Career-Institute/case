@@ -22,4 +22,16 @@ public class CaseService {
     public Case createCase(Case newCase) {
         return caseRepository.save(newCase);
     }
+
+    public Case update(Long id, Case newCase) {
+        Case case1 = caseRepository.getReferenceById(id);
+        case1.setAssigneeID(newCase.getAssigneeID());
+        case1.setCategory(newCase.getCategory());
+        case1.setDescription(newCase.getDescription());
+        case1.setStatus(newCase.getStatus());
+        case1.setTitle(newCase.getTitle());
+        return caseRepository.save(case1);
+
+
+    }
 }

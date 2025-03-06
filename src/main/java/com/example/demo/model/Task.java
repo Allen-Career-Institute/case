@@ -22,9 +22,7 @@ public class Task {
 
     private TaskType taskType;
 
-    @OneToOne
-    @JoinColumn(name = "assignee_id")
-    private Assignee assignee;
+   private String assigneeID;
 
     private String description;
 
