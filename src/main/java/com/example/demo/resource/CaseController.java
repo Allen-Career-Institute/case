@@ -26,6 +26,11 @@ public class CaseController {
         return caseService.getAllCases();
     }
 
+    @GetMapping("/students")
+    public List<Case> getStudentDetails(@RequestParam String studentId) {
+        return caseService.getAllCases(studentId);
+    }
+
     @GetMapping("/{caseId}")
     public List<Task> getAllTasks(@PathVariable("caseId") Long caseId) { return caseService.getAllTasks(caseId);}
 
@@ -37,6 +42,11 @@ public class CaseController {
     @PutMapping("/{caseId}")
     public Case addAssignee(@PathVariable Long caseId, @RequestBody Case newCase) {
         return caseService.update(caseId, newCase);
+    }
+
+    @PostMapping("/{caseId}/tasks")
+    public Task createTask(@PathVariable Long caseId, @RequestBody Task newTask) {
+        return caseService.createTask(caseId, newTask);
     }
 
 
