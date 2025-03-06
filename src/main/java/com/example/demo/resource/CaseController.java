@@ -1,7 +1,7 @@
 package com.example.demo.resource;
 
 
-import com.example.demo.Case;
+import com.example.demo.model.Case;
 import com.example.demo.service.CaseService;
 import org.springframework.web.bind.annotation.*;
 
