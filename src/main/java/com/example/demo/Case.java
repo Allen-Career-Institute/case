@@ -18,7 +18,9 @@ public class Case {
 
     private String title;
     private String description;
-    private Enum<Status> status; // OPEN, IN_PROGRESS, CLOSED
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @ManyToOne
     @JoinColumn(name = "assignee_id")
