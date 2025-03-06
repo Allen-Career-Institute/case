@@ -1,5 +1,6 @@
 import React from "react";
 import TaskList from "./TaskList";
+import CallWidget from "./CallWidget";
 
 const statusOrder = ["OPEN", "ASSIGNED", "IN_PROGRESS", "CLOSED"];
 
@@ -47,6 +48,8 @@ const CaseDetails = ({ selectedCase }) => {
             <p><strong>Description:</strong> {selectedCase.description}</p>
             <p><strong>Category:</strong> {selectedCase.category}</p>
             <p><strong>Created At:</strong> {new Date(selectedCase.createdAt).toLocaleString()}</p>
+
+            <CallWidget caseDetails={selectedCase} />
 
             {/* Task List */}
             <TaskList tasks={selectedCase.tasks} />
