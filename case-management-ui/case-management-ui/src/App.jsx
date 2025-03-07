@@ -48,21 +48,23 @@ const App = () => {
                 >
                     <h3>Cases</h3>
                     <ul className={"left-pane"}>
-                        {cases.map((c) => (
-                            <li
-                                key={c.id}
-                                onClick={() => setSelectedCaseId(c.id)}
-                                style={{
-                                    padding: "10px",
-                                    borderBottom: "1px solid #ddd",
-                                    cursor: "pointer",
-                                    background: selectedCaseId === c.id ? "#f0f0f0" : "white",
-                                }}
-                            >
-                                <strong>{c.title}</strong> <br />
-                                <span>Status: {c.status}</span>
-                            </li>
-                        ))}
+                        {cases
+                            .sort((a, b) => b.id - a.id) // Sorting cases in descending order by ID
+                            .map((c) => (
+                                <li
+                                    key={c.id}
+                                    onClick={() => setSelectedCaseId(c.id)}
+                                    style={{
+                                        padding: "10px",
+                                        borderBottom: "1px solid #ddd",
+                                        cursor: "pointer",
+                                        background: selectedCaseId === c.id ? "#f0f0f0" : "white",
+                                    }}
+                                >
+                                    <strong>{c.title}</strong> <br />
+                                    <span>Status: {c.status}</span>
+                                </li>
+                            ))}
                     </ul>
                 </div>
 

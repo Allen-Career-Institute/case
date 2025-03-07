@@ -106,8 +106,9 @@ const CaseDetails = ({ selectedCase }) => {
             <p><strong>Description:</strong> {caseDetails.description}</p>
             <p><strong>Category:</strong> {caseDetails.category}</p>
             <p><strong>Created At:</strong> {new Date(caseDetails.createdAt).toLocaleString()}</p>
+            <p><strong>Last agent remarks:</strong> {caseDetails.resolutionComment}</p>
+            <p><strong>Student ID:</strong> {caseDetails.studentId}</p>
 
-            {/*<CallWidget caseDetails={caseDetails} />*/}
             <CallWidget caseDetails={caseDetails} onTaskCreated={fetchCaseDetails} />
 
             {/* Task List */}

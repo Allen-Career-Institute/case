@@ -2,6 +2,7 @@
   "name": "case-management-ui",
   "private": true,
   "type": "module",
+  "proxy": "https://api.allen-live.in",
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
