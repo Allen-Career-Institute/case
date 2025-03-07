@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CallPopup from "./CallPopup";
 
-const CallWidget = ({ caseDetails }) => {
+const CallWidget = ({ caseDetails, onTaskCreated}) => {
     const [showPopup, setShowPopup] = useState(false);
 
     const handleCallClick = () => {
@@ -17,7 +17,7 @@ const CallWidget = ({ caseDetails }) => {
                 📞 Call
             </button>
 
-            {showPopup && <CallPopup caseId={caseDetails.id} onClose={() => setShowPopup(false)} />}
+            {showPopup && <CallPopup caseId={caseDetails.id} onClose={() => setShowPopup(false)} onTaskCreated={onTaskCreated} />}
         </div>
     );
 };

@@ -9,9 +9,9 @@ const TaskList = ({ tasks }) => {
             <h3>Tasks</h3>
             <ul style={{ listStyle: "none", padding: 0 }}>
                 {tasks
-                    .sort((a, b) => new Date(b.created_datetime) - new Date(a.created_datetime))
+                    .sort((a, b) => new Date(b.id) - new Date(a.id))
                     .map((task) => (
-                        <TaskItem key={task.created_datetime} task={task} />
+                        <TaskItem key={task.id} task={task} />
                     ))}
             </ul>
         </div>

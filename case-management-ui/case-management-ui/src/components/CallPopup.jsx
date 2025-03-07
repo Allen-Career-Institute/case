@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const CallPopup = ({ caseId, onClose }) => {
+const CallPopup = ({ caseId, onClose, onTaskCreated }) => {
     const [seconds, setSeconds] = useState(0);
     const [transcript, setTranscript] = useState("");
     const mediaRecorderRef = useRef(null);
@@ -83,12 +83,18 @@ const CallPopup = ({ caseId, onClose }) => {
         };
 
         try {
-            await fetch(`http://localhost:9090/cases/${caseId}/tasks`, {
+            const response = await fetch(`http://localhost:9090/cases/${caseId}/tasks`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(taskData),
             });
-            console.log("Task created:", taskData);
+
+            if (response.ok) {
+                console.log("Task created:", taskData);
+                onTaskCreated(); // 🔄 Refresh case details
+            } else {
+                console.error("Failed to create task:", response.statusText);
+            }
         } catch (error) {
             console.error("Failed to create task", error);
         }
