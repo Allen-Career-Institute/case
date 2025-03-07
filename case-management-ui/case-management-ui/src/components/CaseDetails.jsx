@@ -59,7 +59,7 @@ const CaseDetails = ({ selectedCase }) => {
                     const response = await fetch(`http://localhost:9090/cases/${caseDetails.id}/status`, {
                         method: "PATCH",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ status: newStatus, message: comment }),
+                        body: JSON.stringify({ status: newStatus, comment: comment }),
                     });
 
                     if (!response.ok) {
