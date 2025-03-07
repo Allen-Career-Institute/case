@@ -16,11 +16,14 @@ const TaskItem = ({ task }) => (
                 <strong>Description:</strong> {task.description}
             </td>
             <td style={{ border: "1px solid black", padding: "8px" }}>
+                <strong>Duration:</strong> {task.duration}s
+            </td>
+            <td style={{ border: "1px solid black", padding: "8px" }}>
                 <strong>Status:</strong> {task.status}
             </td>
         </tr>
         <tr>
-            <td colSpan="2" style={{ border: "1px solid black", padding: "8px" }}>
+            <td colSpan="3" style={{ border: "1px solid black", padding: "8px" }}>
                 <strong>Transcript:</strong> {task.transcript || "N/A"}
             </td>
         </tr>
