@@ -2,6 +2,7 @@ package com.example.demo.resource;
 
 import com.example.demo.model.Case;
 import com.example.demo.model.Task;
+import com.example.demo.pojo.StatusComment;
 import com.example.demo.service.CaseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -63,10 +64,8 @@ public class CaseController {
 
     @PatchMapping("/{caseId}/status")
     public ResponseEntity<Case> updateCaseStatus(
-            @PathVariable Long caseId,
-            @RequestParam String status,
-            @RequestParam String comment) {
-        return ResponseEntity.ok(caseService.updateCaseStatus(caseId, status, comment));
+            @PathVariable Long caseId, @RequestBody StatusComment statusComment) {
+        return ResponseEntity.ok(caseService.updateCaseStatus(caseId, statusComment.getStatus(), statusComment.getComment()));
     }
 
     @PatchMapping("/{caseId}/assignee")

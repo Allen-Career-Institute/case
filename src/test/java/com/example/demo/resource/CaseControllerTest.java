@@ -2,6 +2,7 @@ package com.example.demo.resource;
 
 import com.example.demo.model.Case;
 import com.example.demo.model.CaseStatus;
+import com.example.demo.pojo.StatusComment;
 import com.example.demo.service.CaseService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -47,7 +48,7 @@ class CaseControllerTest {
         updatedCase.setStatus(CaseStatus.valueOf("COMPLETED"));
         when(caseService.updateCaseStatus(1L, "COMPLETED", "comment")).thenReturn(updatedCase);
 
-        ResponseEntity<Case> response = caseController.updateCaseStatus(1L, "COMPLETED","comment");
+        ResponseEntity<Case> response = caseController.updateCaseStatus(1L, new StatusComment("COMPLETED","comment"));
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody().getStatus()).isEqualTo(CaseStatus.valueOf("COMPLETED"));
