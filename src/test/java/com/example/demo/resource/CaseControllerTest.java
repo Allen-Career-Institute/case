@@ -45,9 +45,9 @@ class CaseControllerTest {
     void updateCaseStatusReturnsUpdatedCase() {
         Case updatedCase = new Case();
         updatedCase.setStatus(CaseStatus.valueOf("COMPLETED"));
-        when(caseService.updateCaseStatus(1L, "COMPLETED")).thenReturn(updatedCase);
+        when(caseService.updateCaseStatus(1L, "COMPLETED", "comment")).thenReturn(updatedCase);
 
-        ResponseEntity<Case> response = caseController.updateCaseStatus(1L, "COMPLETED");
+        ResponseEntity<Case> response = caseController.updateCaseStatus(1L, "COMPLETED","comment");
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody().getStatus()).isEqualTo(CaseStatus.valueOf("COMPLETED"));

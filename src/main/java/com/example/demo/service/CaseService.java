@@ -63,10 +63,11 @@ public class CaseService {
         return false;
     }
 
-    public Case updateCaseStatus(Long caseId, String status) {
+    public Case updateCaseStatus(Long caseId, String status, String comment) {
         Case existingCase = caseRepository.findById(caseId).orElse(null);
         if (existingCase != null) {
             existingCase.setStatus(CaseStatus.valueOf(status));
+            existingCase.setResolutionComment(comment);
             return caseRepository.save(existingCase);
         }
         return null;

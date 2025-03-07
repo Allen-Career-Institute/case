@@ -30,6 +30,8 @@ public class Case {
 
     private String assigneeId;
 
+    private String resolutionComment;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campaign_id")
     @JsonIgnoreProperties("cases")

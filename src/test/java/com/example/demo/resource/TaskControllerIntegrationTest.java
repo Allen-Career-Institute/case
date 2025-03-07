@@ -179,6 +179,8 @@
 //    private Task createAndSaveTask(String title, Case linkedCase, String assigneeId) {
 //        Task task = createTask(title, linkedCase);
 //        task.setAssigneeId(assigneeId);
+//        linkedCase.getTasks().add(task);
+//        caseRepository.save(linkedCase);
 //        return taskRepository.save(task);
 //    }
 //}

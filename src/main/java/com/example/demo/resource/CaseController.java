@@ -64,8 +64,9 @@ public class CaseController {
     @PatchMapping("/{caseId}/status")
     public ResponseEntity<Case> updateCaseStatus(
             @PathVariable Long caseId,
-            @RequestParam String status) {
-        return ResponseEntity.ok(caseService.updateCaseStatus(caseId, status));
+            @RequestParam String status,
+            @RequestParam String comment) {
+        return ResponseEntity.ok(caseService.updateCaseStatus(caseId, status, comment));
     }
 
     @PatchMapping("/{caseId}/assignee")
