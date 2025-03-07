@@ -9,8 +9,12 @@ const CaseDetails = ({ selectedCase }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+
     useEffect(() => {
         if (!selectedCase) return;
+
+        // Fetch only if selectedCase.id is different from the last fetched case
+        if (caseDetails && caseDetails.id === selectedCase.id) return;
 
         const fetchCaseDetails = async () => {
             setLoading(true);
@@ -34,6 +38,9 @@ const CaseDetails = ({ selectedCase }) => {
     }, [selectedCase]);
 
     if (!selectedCase) return <div>Select a case to view details</div>;
+    if (loading) return <div>Loading case details...</div>;
+    if (error) return <div>Error: {error}</div>;
+    if (!caseDetails) return null;
 
     const handleStatusChange = (newStatus) => {
         const currentIndex = statusOrder.indexOf(caseDetails.status);

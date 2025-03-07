@@ -29,14 +29,14 @@ const App = () => {
     const selectedCase = cases.find((c) => c.id === selectedCaseId);
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", height: "100vh", width: "100vw" }}>
+        <div className={"app-container"}>
 
             {/* Common Header */}
-            <div style={{ height: "50px", background: "#333", color: "white", display: "flex", alignItems: "center", paddingLeft: "10px" }}>
+            <div className={"header"}>
                 <h2>Case Management</h2>
             </div>
 
-            <div style={{ display: "flex", flexGrow: 1 }}>
+            <div className={"main-container"}>
                 {/* Left Pane - Case List */}
                 <div
                     style={{
@@ -47,7 +47,7 @@ const App = () => {
                     }}
                 >
                     <h3>Cases</h3>
-                    <ul style={{ listStyle: "none", padding: 0 }}>
+                    <ul className={"left-pane"}>
                         {cases.map((c) => (
                             <li
                                 key={c.id}

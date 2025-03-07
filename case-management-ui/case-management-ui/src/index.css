@@ -66,3 +66,63 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.main-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden; /* Prevent full-page scroll */
+}
+
+.header {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 0px;
+  font-size: 20px;
+}
+
+/* Left Pane: Scrollable */
+.left-pane {
+  height: 100%;
+  overflow-y: auto; /* Enable vertical scrolling */
+  background-color: #f4f4f4;
+  padding: 0px;
+
+}
+
+/* Right Pane: Fixed (Non-Scrollable) */
+.right-pane {
+  width: 60%;
+  height: 100%;
+  overflow-y: auto; /* Enable vertical scrolling */
+  background-color: white;
+  padding: 10px;
+}
+
+/* Styling for case items */
+.case-item {
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.case-item:hover {
+  background-color: #eef;
+}
+
+.selected {
+  background-color: #ddd;
+  font-weight: bold;
+}
+
+

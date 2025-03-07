@@ -1,55 +1,21 @@
 import React from "react";
-import TaskList from "./TaskList";
+import TaskItem from "./TaskItem";
 
-const statusOrder = ["OPEN", "ASSIGNED", "IN_PROGRESS", "CLOSED"];
-
-const CaseDetails = ({ selectedCase }) => {
-    if (!selectedCase) return <div>No associated tasks</div>;
-
-    const handleStatusChange = (newStatus) => {
-        const currentIndex = statusOrder.indexOf(selectedCase.status);
-        const newIndex = statusOrder.indexOf(newStatus);
-
-        if (newIndex > currentIndex) {
-            const confirmChange = window.confirm(`Change status to ${newStatus}?`);
-            if (confirmChange) {
-                console.log(`Updating case ${selectedCase.id} to status: ${newStatus}`);
-                // API call to update status can be placed here
-            }
-        } else {
-            alert("Cannot go back to a previous status.");
-        }
-    };
+const TaskList = ({ tasks }) => {
+    if (!tasks || tasks.length === 0) return <p>No tasks available.</p>;
 
     return (
         <div>
-            <h2>{selectedCase.title}</h2>
-            <p>{selectedCase.description}</p>
-
-            {/* Status Bar */}
-            <div style={{ display: "flex", marginBottom: "10px" }}>
-                {statusOrder.map((status) => (
-                    <div
-                        key={status}
-                        onClick={() => handleStatusChange(status)}
-                        style={{
-                            padding: "10px",
-                            flex: 1,
-                            textAlign: "center",
-                            cursor: "pointer",
-                            background: selectedCase.status === "CLOSED" ? "green" : selectedCase.status === status ? "blue" : "lightgray",
-                            color: "white",
-                        }}
-                    >
-                        {status}
-                    </div>
-                ))}
-            </div>
-
-            {/* Task List */}
-            <TaskList tasks={selectedCase.tasks} />
+            <h3>Tasks</h3>
+            <ul style={{ listStyle: "none", padding: 0 }}>
+                {tasks
+                    .sort((a, b) => new Date(b.created_datetime) - new Date(a.created_datetime))
+                    .map((task) => (
+                        <TaskItem key={task.created_datetime} task={task} />
+                    ))}
+            </ul>
         </div>
     );
 };
 
-export default CaseDetails;
+export default TaskList;

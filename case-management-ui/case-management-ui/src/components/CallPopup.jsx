@@ -75,7 +75,7 @@ const CallPopup = ({ caseId, onClose }) => {
 
         const taskData = {
             taskType: "CALL",
-            assigneeID: assigneeID || "ABC1", // Default value if not provided
+            assigneeID:  "ABC1", // Default value if not provided
             description: "Outbound call to customer",
             duration: `${seconds}`,
             transcript: `${transcript}`,
