@@ -44,14 +44,12 @@ public class Case {
 
     private String studentId;
 
-    @JsonIgnore
     private String studentProfile;
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    @JsonIgnore
     public String getStudentProfile() {
         return "https://astra.allen.in/student-support/resource-management/student/view/"+studentId;
     }
